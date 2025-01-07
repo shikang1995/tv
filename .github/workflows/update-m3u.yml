@@ -1,0 +1,34 @@
+name: Auto Update M3U File
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"  # 每分钟执行一次
+  workflow_dispatch:  # 允许手动触发工作流
+
+jobs:
+  update-m3u:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # 检出仓库代码
+
+      - name: Download M3U file from specified URL
+        run: |
+          # 使用curl从指定URL下载文件，并将其保存为 4qq71F (2).m3u
+          curl -L -o downloaded_playlist.m3u "http://niu66.vip/4qq71F/path/to/file"  # 替换为你要下载的文件URL
+
+      - name: Replace M3U file in GitHub repository
+        run: |
+          # 将下载的文件替换到仓库中的目标位置
+          mv downloaded_playlist.m3u path/to/your/repo/4qq71F (2).m3u  # 替换仓库中的文件路径
+
+      - name: Commit and push the changes
+        run: |
+          git config --global user.name "shikang1995"  # 填写你的GitHub用户名
+          git config --global user.email "frankwong_hd@hotmail.com"  # 填写你的GitHub邮箱
+          git add path/to/your/repo/4qq71F (2).m3u  # 确保替换正确的文件路径
+          git commit -m "Auto update M3U file from URL"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub提供的自动生成Token进行身份验证
