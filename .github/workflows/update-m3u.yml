@@ -16,12 +16,12 @@ jobs:
       - name: Download M3U file from specified URL
         run: |
           # 使用curl从指定URL下载文件，并将其保存为 4qq71F.m3u
-          curl -L -o downloaded_playlist.m3u "http://niu66.vip/4qq71F/path/to/file"  # 替换为你要下载的文件URL
+          curl -L -o 4qq71F.m3u "http://niu66.vip/4qq71F/path/to/file"  # 替换为你要下载的文件URL
 
       - name: Replace M3U file in GitHub repository
         run: |
           # 将下载的文件替换到仓库中的目标位置
-          mv downloaded_playlist.m3u path/to/your/repo/4qq71F.m3u  # 替换仓库中的文件路径
+          mv 4qq71F.m3u path/to/your/repo/4qq71F.m3u  # 替换仓库中的文件路径
 
       - name: Commit and push the changes
         run: |
