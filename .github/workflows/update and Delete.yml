@@ -2,9 +2,9 @@ name: Auto Update and Periodic Delete M3U File
 
 on:
   schedule:
-    - cron: "0 * * * *"   # 每小时触发一次，更新文件
-    - cron: "0 0 13 * *"  # 每月 13 号触发一次，删除文件
-  workflow_dispatch:  # 手动触发选项
+    - cron: "0 * * * *"    # 每小时触发一次，更新文件
+    - cron: "20 0 * * *"   # 每天 0 点 20 分触发一次，删除文件
+  workflow_dispatch:       # 手动触发选项
 
 jobs:
   update-m3u:
@@ -32,7 +32,6 @@ jobs:
 
   delete-m3u:
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' && github.event.schedule == '0 0 13 * *'
 
     steps:
       - name: Checkout repository
@@ -49,7 +48,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Remove 4qq71F.m3u after one month" || echo "No changes to commit"
+          git commit -m "Remove 4qq71F.m3u after one day" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
