@@ -19,11 +19,6 @@ jobs:
           curl -L -o 4qq71F.m3u "http://niu66.vip/4qq71F"
           echo "Download completed."
 
-      - name: Replace the M3U file in repository
-        run: |
-          mv 4qq71F.m3u 4qq71F.m3u
-          echo "M3U file replaced in repository."
-
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
