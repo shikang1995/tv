@@ -22,7 +22,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -B temp-links
-          mv 4qq71F.m3u path/to/4qq71F.m3u
+          mv 4qq71F.m3u m3u/m3u/20250112.m3u
           git add 4qq71F.m3u
           git commit -m "Update 4qq71F.m3u with new content"
           git push -f origin temp-links
