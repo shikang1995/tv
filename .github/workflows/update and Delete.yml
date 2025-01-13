@@ -3,31 +3,53 @@ name: Auto Update and Periodic Delete M3U File
 on:
   schedule:
     - cron: "0 */6 * * *"  # 每 6 小时触发一次，更新文件
-    - cron: "35 14 13 * *" # 每月 13 号下午 14:50 触发，删除文件
+    - cron: "40 14 13 * *" # 每月 13 号下午 14:50 触发，删除文件
   workflow_dispatch:  # 手动触发选项
 
 jobs:
-  manage-m3u:
+  update-m3u:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Execute Task
+      - name: Download M3U file from URL
         run: |
-          if [[ "${{ github.event.schedule }}" == "*/1 * * * *" ]]; then
-            echo "Downloading M3U file..."
-            curl -L -o file.m3u "http://niu66.vip/Z8PMac"
-            git add file.m3u
-            git commit -m "Auto update file.m3u from http://niu66.vip/Z8PMac" || echo "No changes to commit"
-          elif [[ "${{ github.event.schedule }}" == "0 0 1 * *" ]]; then
-            echo "Deleting M3U file..."
-            rm -f 20250213.m3u
-            git add .
-            git commit -m "Remove file.m3u after one month" || echo "No changes to commit"
-          fi
-      - name: Push Changes
-        run: git push
+          echo "Downloading file from http://niu66.vip/Z8PMac..."
+          curl -L -o 0213.m3u "http://niu66.vip/Z8PMac"
+          echo "Download completed."
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add 0213.m3u
+          git commit -m "Auto update 0213.m3u from http://niu66.vip/Z8PMac" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  delete-m3u:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' && github.event.schedule == '0 0 1 * *'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Delete the M3U file
+        run: |
+          echo "Deleting 0213.m3u file..."
+          rm -f 0213.m3u
+          echo "File deleted."
+
+      - name: Commit and Push Deletion
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Remove 4qq71F.m3u after one month" || echo "No changes to commit"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
