@@ -1,4 +1,4 @@
-name: Auto Update M3U File
+name: Frank Auto Update M3U File
 
 on:
   schedule:
