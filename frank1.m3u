@@ -1,7 +1,5 @@
-#EXTM3U
-#EXT-X-VERSION:4
-#EXT-X-TARGETDURATION:6
-#EXT-X-MEDIA-SEQUENCE:0
-#EXTINF:6,
-https://d.kstore.dev/download/10218/7H.mp4
-#EXT-X-ENDLIST
+#EXTINF:-1 tvg-id="SkySp.F1.HD.uk" tvg-logo="https://i.imgur.com/9wrgXyy.png" group-title="Sports | 4K UHD",Sky Sports F1 UHD
+https://7pal.short.gy/SSF1uhd
+https://7pal.short.gy/nowhkp2
+#EXTINF:-1 tvg-id="Now.Sports.Premier.League.3.hk" tvg-logo="https://i.imgur.com/kKFsIHz.png" group-title="Sports | EPL", Now Sports Premier League 3 FHD
+https://7pal.short.gy/nowhkp3
